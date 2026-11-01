@@ -1,1 +1,81 @@
-/* LEKHANI - Scrapbook Design System */
+/* Scrapbook layer + later features (essay, Buy tab, Pothi chip, notes) */
+/* ===== SCRAPBOOK LAYER: washi tape, tilted pasted pieces, handwriting, doodles ===== */
+:root{--hand:'Caveat','Kalam',cursive;--tapeA:rgba(255,226,140,.82);--tapeB:rgba(244,162,160,.8);--tapeC:rgba(150,205,190,.8);--tapeD:rgba(160,190,235,.8);
+--tapeTex:repeating-linear-gradient(115deg,rgba(255,255,255,.35) 0 6px,transparent 6px 12px)}
+html[lang=mr]{--hand:'Kalam','Caveat',cursive}
+.eyebrow,.count,.foot{font-family:var(--hand)}
+.eyebrow{font-size:19px;letter-spacing:.02em;text-transform:none;font-weight:700}
+html[lang=mr] .eyebrow{font-size:15px}
+.count{font-size:17px}html[lang=mr] .count{font-size:14px}
+.portrait figcaption,.sh-cat,.ccard .go,.sign{font-family:var(--hand)}
+.portrait figcaption{font-size:19px;letter-spacing:.02em;text-transform:none}html[lang=mr] .portrait figcaption{font-size:15px}
+.ccard .go{font-size:18px}html[lang=mr] .ccard .go{font-size:14px}
+.sign{font-size:36px}html[lang=mr] .sign{font-size:24px}
+/* scribbled underline under the highlighted word */
+h1 em{padding-bottom:.12em;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='8'%3E%3Cpath d='M0 4 Q5 0 10 4 T20 4 T30 4 T40 4' fill='none' stroke='%23d9bd7d' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x left bottom/26px 7px}
+html[lang=mr] h1 em{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='8'%3E%3Cpath d='M0 4 Q5 0 10 4 T20 4 T30 4 T40 4' fill='none' stroke='%238f5a10' stroke-width='2.2' stroke-linecap='round'/%3E%3C/svg%3E")}
+/* sticky note + paper clip next to the hero book */
+.hero-art:after{content:"tap the cover!";position:absolute;z-index:3;right:2%;top:2%;max-width:130px;padding:16px 14px 12px;transform:rotate(5deg);background:linear-gradient(180deg,#fff0a6,#f7dd7a);color:#4a3508;font:700 21px/1.1 var(--hand);text-align:center;box-shadow:0 10px 14px -6px rgba(0,0,0,.5),inset 0 -14px 18px -14px rgba(120,80,0,.4);pointer-events:none}
+html[lang=mr] .hero-art:after{content:"कव्हरवर टॅप करा!";font-size:16px;line-height:1.3}
+.hero-art:before{content:"";position:absolute;z-index:4;right:calc(2% + 58px);top:calc(2% - 8px);width:20px;height:44px;border:3px solid #c9ced4;border-radius:10px 10px 12px 12px;border-bottom-width:4px;transform:rotate(5deg);pointer-events:none;filter:drop-shadow(0 2px 2px rgba(0,0,0,.4))}
+@media(max-width:860px){.hero-art:after{right:0;top:auto;bottom:6%;font-size:18px;max-width:104px;padding:12px 10px 9px}.hero-art:before{display:none}}
+/* books pasted onto the page with washi tape */
+.bcard{position:relative;transition:transform .3s cubic-bezier(.2,.8,.3,1)}
+.bcard:nth-child(3n+1){transform:rotate(-1.4deg)}.bcard:nth-child(3n+2){transform:rotate(1deg)}.bcard:nth-child(3n){transform:rotate(-.5deg)}
+.bcard:hover,.bcard:focus-visible{transform:rotate(0) scale(1.02);z-index:2}
+.bcard:before{content:"";position:absolute;z-index:4;top:-10px;left:50%;width:74px;height:22px;margin-left:-37px;transform:rotate(-3deg);background:var(--tapeTex),var(--tapeA);box-shadow:0 2px 3px rgba(0,0,0,.28);clip-path:polygon(0 8%,4% 0,8% 10%,12% 0,88% 0,92% 10%,96% 0,100% 8%,100% 92%,96% 100%,92% 90%,88% 100%,12% 100%,8% 90%,4% 100%,0 92%);pointer-events:none}
+.bcard:nth-child(4n+2):before{background:var(--tapeTex),var(--tapeB);transform:rotate(4deg)}
+.bcard:nth-child(4n+3):before{background:var(--tapeTex),var(--tapeC);transform:rotate(-6deg)}
+.bcard:nth-child(4n):before{background:var(--tapeTex),var(--tapeD);transform:rotate(2deg)}
+.bt{font-family:var(--hand);font-size:23px;line-height:1.1;font-weight:700;margin-top:12px}
+html[lang=mr] .bt{font-size:16.5px;line-height:1.4}
+.bc{font-family:var(--hand);font-size:17px}html[lang=mr] .bc{font-size:13.5px}
+/* contact + accordion = pinned notes */
+.ccard{position:relative}
+.ccard:nth-child(odd){transform:rotate(-1.1deg)}.ccard:nth-child(even){transform:rotate(1.2deg)}
+.ccard:hover{transform:rotate(0) translateY(-4px)}
+.ccard:before{content:"";position:absolute;z-index:2;top:-11px;left:22px;width:66px;height:22px;transform:rotate(-5deg);background:var(--tapeTex),var(--tapeA);box-shadow:0 2px 3px rgba(0,0,0,.3);clip-path:polygon(0 8%,5% 0,10% 10%,15% 0,85% 0,90% 10%,95% 0,100% 8%,100% 92%,95% 100%,90% 90%,85% 100%,15% 100%,10% 90%,5% 100%,0 92%);pointer-events:none}
+.ccard:nth-child(2):before{background:var(--tapeTex),var(--tapeB);left:auto;right:22px;transform:rotate(5deg)}
+.ccard:nth-child(3):before{background:var(--tapeTex),var(--tapeC)}
+.ccard:nth-child(4):before{background:var(--tapeTex),var(--tapeD);left:auto;right:22px;transform:rotate(4deg)}
+.acc-i{position:relative}
+.acc-i:nth-child(odd){transform:rotate(-.35deg)}.acc-i:nth-child(even){transform:rotate(.3deg)}.acc-i.open{transform:none}
+.acc-i:before{content:"";position:absolute;top:-8px;right:26px;width:54px;height:18px;transform:rotate(4deg);background:var(--tapeTex),var(--tapeB);box-shadow:0 2px 3px rgba(0,0,0,.28);pointer-events:none;z-index:2}
+.acc-i:nth-child(2n):before{left:26px;right:auto;background:var(--tapeTex),var(--tapeC);transform:rotate(-4deg)}
+.acc-i:nth-child(3n):before{background:var(--tapeTex),var(--tapeA)}
+.acc-h{font-family:var(--hand);font-size:26px;line-height:1.15}html[lang=mr] .acc-h{font-size:17px;line-height:1.45}
+.acc-b .q{font-family:var(--hand);font-size:25px}html[lang=mr] .acc-b .q{font-size:17px}
+.essay p.lead,.essay p.pull,.e-sig b{font-family:var(--hand)}
+.essay p.lead{font-size:26px;font-style:normal;line-height:1.3}html[lang=mr] .essay p.lead{font-size:18.5px}
+.essay p.pull{font-size:25px;background:linear-gradient(transparent 55%,rgba(255,226,140,.28) 55%);border-left:0;padding-left:4px;display:inline}html[lang=mr] .essay p.pull{font-size:18px;background:linear-gradient(transparent 62%,rgba(255,200,90,.35) 62%)}
+.essay p.pull{display:block}
+.essay p.close{font-family:var(--hand);font-size:24px;font-style:normal}html[lang=mr] .essay p.close{font-size:17.5px}
+.e-sig b{font-size:34px}html[lang=mr] .e-sig b{font-size:22px}
+/* taped photograph: tape on corners + doodle star */
+.portrait:after{content:"★";position:absolute;right:-10px;bottom:34px;font-size:30px;color:#e8b53c;transform:rotate(14deg);text-shadow:0 2px 3px rgba(0,0,0,.35);pointer-events:none}
+@media(max-width:760px){.portrait:after{display:none}.bcard:nth-child(3n+1),.bcard:nth-child(3n+2),.bcard:nth-child(3n){transform:none}.bcard:nth-child(odd){transform:rotate(-1deg)}.bcard:nth-child(even){transform:rotate(1deg)}.bcard:before{width:56px;height:18px;margin-left:-28px}}
+/* book popup: cover taped on */
+.sh-cover{overflow:visible}
+.sh-cover:after{content:"";position:absolute;z-index:3;top:-9px;left:50%;width:70px;height:22px;margin-left:-35px;transform:rotate(-4deg);background:var(--tapeTex),var(--tapeA);box-shadow:0 2px 3px rgba(0,0,0,.3);pointer-events:none}
+.sh-title,.sh-tag{font-family:var(--hand)}.sh-title{font-size:clamp(34px,4vw,50px)}html[lang=mr] .sh-title{font-family:var(--serif);font-size:clamp(24px,3vw,34px)}
+.sh-tag{font-size:23px;font-style:normal}html[lang=mr] .sh-tag{font-size:16px}
+@media(prefers-reduced-motion:reduce){.bcard{transition:none}}
+
+.sh-act #shPrint{background:linear-gradient(180deg,var(--m1),var(--m2))}
+html[lang=mr] .sh-act #shPrint{color:#3b2412}
+.cards .ccard:last-child:nth-child(odd){grid-column:1/-1}
+
+a.chip{display:inline-flex;align-items:center;text-decoration:none;color:var(--muted)}a.chip:hover{color:var(--text)}
+
+.buy{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px;margin-top:20px}
+.ccard.bigc{align-items:center;text-align:center;padding:26px 20px 24px;gap:10px;justify-content:flex-start}
+.ccard.bigc b{font-family:var(--hand);font-size:32px}html[lang=mr] .ccard.bigc b{font-family:var(--serif);font-size:21px}
+.ccard.bigc>span{max-width:34ch}
+.ccard.bigc .btn{margin-top:8px;pointer-events:none}
+.b-st{width:min(260px,80%);height:auto;filter:drop-shadow(0 6px 8px rgba(0,0,0,.4));transform:rotate(-2deg)}
+.b-ic{width:92px;height:92px;filter:drop-shadow(0 6px 8px rgba(0,0,0,.4));transform:rotate(3deg)}
+@media(max-width:560px){.buy{grid-template-columns:1fr;gap:18px}.ccard.bigc{padding:20px 16px}.b-st{width:200px}.b-ic{width:72px;height:72px}}
+
+.wnote{padding:6px 18px 8px;max-width:none}
+.essay p.kick{font-family:var(--hand);font-size:26px;color:var(--accent);margin:0 0 .1em}html[lang=mr] .essay p.kick{font-size:19px}
+.wnote p.lead{border-bottom:0;padding-bottom:0}
